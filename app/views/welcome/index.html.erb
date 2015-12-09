@@ -1,0 +1,44 @@
+<div class="matches">
+	<div class="container-fluid">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+			<h3><strong>Your food choice:</strong> <%= current_user.food_choice %><br>
+			Here are your matches!</h3>
+			</div>
+			<br>
+			<div class="panel-body">
+				<div class="row">
+					<% @users.each_with_index do |user, index| %>
+						<div class="col-md-6" id="matches">
+						<% if user.id == current_user.id || user.interested_in == current_user.interested_in %>
+						<div class="hidden"></div>
+
+						<% else %>
+
+							<% if current_user.food_choice == user.food_choice %>
+							<div class="thumbnail">
+							<%= image_tag user.avatar(:medium) %>
+							<h3><%= user.username %></h3>
+							<%= user.name %>, <%= user.age %><br>
+							<%= user.location %><br>
+							<p>Fun Fact: <%= user.bio %> | Interested in: <%= user.interested_in %></p>
+
+							<button type="button" class="btn btn-default like-button"><span class="glyphicon glyphicon-cutlery"></span></button>
+
+							<button type="button" class="btn btn-default dislike-button"><span class="glyphicon glyphicon-remove"></span></button>
+							<br><br>
+							</div>
+
+
+
+							<% end %>
+
+						<% end %>
+						</div>
+
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
